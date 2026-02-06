@@ -55,8 +55,8 @@ Folgende Konzepte habe ich in diesem Projekt tiefgreifend verankert:
 ## 🧪 Test-Account (Demo)
 Um die Funktionen für registrierte Nutzer (Rezepte erstellen, eigene Rezepte verwalten) sofort testen zu können, ohne ein neues Konto zu erstellen, kann dieser Test-Account genutzt werden:
 
-* **E-Mail:** testuser@beispiel.de
-* **Passwort:** Test123!
+* **E-Mail:** admin@example.com
+* **Passwort:** Demo123!
 
 > **Hinweis:** Als Testnutzer können Sie nur Rezepte bearbeiten oder löschen, die diesem Account zugeordnet sind (Sicherheits-Feature "Ownership-Check").
 
