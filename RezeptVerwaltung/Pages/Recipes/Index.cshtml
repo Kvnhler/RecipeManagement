@@ -1,0 +1,109 @@
+@page
+@* Markiert die Datei als ausführbare Website mit eigener URL *@
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+@model RezeptVerwaltung.Pages.Recipes.IndexModel
+@* Veküpft das HTML mit der C#-Klasse für den Datenzugriff *@
+
+<style>
+    .shadow-hover:hover {
+        background-color: rgba(0,0,0,0.05) !important;
+        transition: background-color 0.2s ease;
+    }
+</style>
+
+@{
+    @* Wir entfernen Layout = null, damit das Menü erscheint, welches bereits global festgelegt wurde *@
+    ViewData["Title"] = "Rezept Übersicht"; @* Setzt den Text für den BrowserTab *@
+}
+ 
+<div class="container">
+
+    <h1>Rezeptsammlung</h1>
+    <p>Hier siehst du alle Rezepte</p>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            <a asp-page="./Create" class="btn btn-success mb-3">
+                <i class="bi bi-plus-lg"></i> Neues Rezept hinzufügen
+            </a>
+            <a asp-page="./ShowMyRecipes" class="btn btn-success mb-3">
+                <i class="bi bi-plus-lg"></i> Meine eigenen Rezepte ansehen
+            </a>
+        </div>
+    
+    }
+    else
+    {
+        <div class="alert alert-info shadow-sm">
+            <i class="bi bi-info-circle me-2"></i> 
+            Möchtest du eigene Rezepte speichern? 
+            <a asp-area="Identity" asp-page="/Account/Login" class="alert-link">Logge dich ein</a> oder 
+            <a asp-area="Identity" asp-page="/Account/Register" class="alert-link">registriere dich kostenlos!</a>
+        </div>
+    }
+    
+    <table class="table table-striped">
+
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Zutaten</th>
+            <th>Zeit</th>
+        </tr>
+        </thead>
+
+        <tbody> @* Start der C# Schleife: Gehe jedes "r" (Rezept) in der Liste "Recipes" durch *@
+        @foreach (var r in Model.Recipes)
+        {
+            <tr onclick="location.href='@Url.Page("./Details", new { id = r.Id })'"
+                style="cursor: pointer;"
+                class="align-middle shadow-hover">
+                
+                <td>@r.Title</td>
+                <td>@r.Ingredients</td>
+                <td>@r.Time Min.</td>
+                
+            </tr>
+        }
+        @* Ende der C# Schleife *@
+        
+        @*
+        Was passiert hier genau?
+@Url.Page(...): Dies ist ein C#-Befehl, der im Hintergrund die richtige URL generiert (z. B. /Recipes/Details?id=5).
+
+location.href='...': Das ist JavaScript. Es sagt dem Browser: "Ändere deine aktuelle Adresse zu diesem Pfad."
+
+cursor: pointer;: Das ist CSS. Es sorgt dafür, dass aus dem Pfeil die "Hand" wird, sobald man über die Zeile fährt. So weiß der User sofort: "Hier kann ich klicken."
+*@
+        </tbody>
+    </table>
+</div>
+
+
+<!-- 
+Grundliegende Erklärungen für den HTML Code:
+
+@* Durch das @-Symbol, bricht der Compiler aus dem HTML Code in den C# Code aus  *@
+
+-->
+
+<!-- Grundschnitt einer HTML Seite erklärt:
+
+    //Layout = null;
+    //Das bedeutet: " Diese Seite ist ein Einzelgänger. Ignoriere das globale Design und zeige nur das an, was in dieser Datei steht" 
+
+-- Der Folgende Code ist daher also eher das Skelett für den neubau einer Seite
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    
+</div>
+</body>
+</html>
+-->

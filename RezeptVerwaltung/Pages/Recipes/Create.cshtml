@@ -1,0 +1,25 @@
+@page
+@model RezeptVerwaltung.Pages.Recipes.Create
+
+<div class="container">
+    <h2>Neues Rezept ersteller</h2>
+    
+    <form method="post"> <div class="mb-3">
+        <label class="form-label">Titel des Rezepts</label>
+        <input asp-for="NewRecipe.Title" class="form-control" />
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label">Zutaten</label>
+        <textarea asp-for="NewRecipe.Ingredients" class="form-control"></textarea>
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label">Zeitaufwand (Minuten)</label>
+        <input asp-for="NewRecipe.Time" class="form-control" type="number" />
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Speichern</button>
+    <a asp-page="./Index" class="btn btn-secondary">Abbrechen</a>
+    </form>
+</div>

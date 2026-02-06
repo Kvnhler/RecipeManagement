@@ -1,0 +1,46 @@
+@page
+@model RezeptVerwaltung.Pages.Recipes.ShowMyRecipesModel
+
+<style>
+    .shadow-hover:hover {
+        background-color: rgba(0,0,0,0.05) !important;
+        transition: background-color 0.2s ease;
+    }
+</style>
+
+@{
+    @* Wir entfernen Layout = null, damit das Menü erscheint, welches bereits global festgelegt wurde *@
+    ViewData["Title"] = "Meine Rezept Übersicht"; @* Setzt den Text für den BrowserTab *@
+}
+
+<div class="container">
+
+    <h1>Meine Rezeptsammlung</h1>
+    <p>Hier siehst du alle Rezepte</p>
+    
+    <table class="table table-striped">
+
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Zutaten</th>
+            <th>Zeit</th>
+        </tr>
+        </thead>
+
+        <tbody> @* Start der C# Schleife: Gehe jedes "r" (Rezept) in der Liste "Recipes" durch *@
+        @foreach (var r in Model.Recipes)
+        {
+            <tr onclick="location.href='@Url.Page("./Details", new { id = r.Id })'"
+                style="cursor: pointer;"
+                class="align-middle shadow-hover">
+                
+                <td>@r.Title</td>
+                <td>@r.Ingredients</td>
+                <td>@r.Time Min.</td>
+                
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,99 @@
+@page
+@using Microsoft.EntityFrameworkCore.Scaffolding.Internal
+@model RezeptVerwaltung.Pages.Recipes.DetailsModel
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        @TempData["SuccessMessage"]
+        <button type="button" vlass="btn-close" data-bs-dismiss="modal" aria-label="Close" data-bs-dismiss="alert"></button>
+    </div>
+}
+<div class="container">
+    <h1>@Model.Recipe.Title</h1>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">Zutaten</dt>
+        <dd class="col-sm-10">@Model.Recipe.Ingredients</dd>
+        
+        <dt class="col-sm-2">Dauer</dt>
+        <dd class="col-sm-10">@Model.Recipe.Time</dd>
+    </dl>
+    
+    <a asp-page="./Index" class="btn btn-secondary">Zurück</a>
+    
+    @if (Model.ownerIsLoggedIn)
+    {
+        <!-- BootstrapModal für die LöschenAktion -->
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+        Löschen
+    </button>
+    }
+    
+    
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"> <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="deleteModalLabel">Löschen bestätigen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Möchtest du das Rezept <strong>@Model.Recipe.Title</strong> wirklich löschen? 
+                    Diese Aktion kann nicht rückgängig gemacht werden.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                
+                    <form method="post" asp-page-handler="Delete">
+                        <input type="hidden" name="id" value="@Model.Recipe.Id" />
+                        <button type="submit" class="btn btn-danger">Endgültig löschen</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @if (Model.ownerIsLoggedIn)
+    {
+        <!-- BootstrapModal für die "Bearbeiten Aktion" -->
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">
+        Bearbeiten
+    </button>
+    }
+    
+    
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg"> <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title" id="editModalLabel">Rezept bearbeiten</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post" asp-page-handler="Edit">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="Recipe.Id" />
+                        <input type="hidden" asp-for="Recipe.UserId" />
+
+                        <div class="mb-3">
+                            <label class="form-label">Titel</label>
+                            <input asp-for="Recipe.Title" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Zutaten</label>
+                            <textarea asp-for="Recipe.Ingredients" class="form-control" rows="5"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Zeitaufwand (Min)</label>
+                            <input asp-for="Recipe.Time" class="form-control" type="number" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                        <button type="submit" class="btn btn-warning">Änderungen speichern</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>
