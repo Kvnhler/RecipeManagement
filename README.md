@@ -48,7 +48,7 @@ Folgende Konzepte habe ich in diesem Projekt tiefgreifend verankert:
 
 ## Demo
 
-
+https://github.com/user-attachments/assets/953da8ae-f11f-4654-925e-ffe42282fdb1
 
 ---
 
