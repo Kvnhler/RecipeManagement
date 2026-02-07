@@ -56,14 +56,24 @@
         <tbody> @* Start der C# Schleife: Gehe jedes "r" (Rezept) in der Liste "Recipes" durch *@
         @foreach (var r in Model.Recipes)
         {
-            <tr onclick="location.href='@Url.Page("./Details", new { id = r.Id })'"
+            string targetUrl;
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                targetUrl = Url.Page("./Details", new { id = r.Id });
+            }
+            else
+            {
+                var returnUrl = Url.Page("./Details", new { id = r.Id });
+                targetUrl = $"/Identity/Account/Login?ReturnUrl={System.Net.WebUtility.UrlEncode(returnUrl)}";
+            }
+
+            <tr onclick="location.href='@targetUrl'"
                 style="cursor: pointer;"
                 class="align-middle shadow-hover">
-                
+        
                 <td>@r.Title</td>
                 <td>@r.Ingredients</td>
                 <td>@r.Time Min.</td>
-                
             </tr>
         }
         @* Ende der C# Schleife *@

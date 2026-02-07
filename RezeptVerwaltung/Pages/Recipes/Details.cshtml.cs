@@ -29,17 +29,39 @@ public class DetailsModel : PageModel
         //Wir suchen das Rezept, das die ID hat UND dem User gehört (Sicherheit!)
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        
-        Recipe = await _context.Recipes
-            .FirstOrDefaultAsync(r => r.Id == id && r.UserId == userId);
 
+        Recipe = await _context.Recipes
+            .FirstOrDefaultAsync(r => r.Id == id);
         
+        //Diese Variable bekommt der UserId aus dem geklickten Rezept
+        var recipeUserId = await _context.Recipes
+            .Where(r => r.Id == id)
+            .Select(r => r.UserId)
+            .FirstOrDefaultAsync();
+
+        if (recipeUserId == userId)
+        {
+            ownerIsLoggedIn = true;
+        }
+        else
+        {
+            ownerIsLoggedIn = false;
+        }
+
         if (Recipe == null)
         {
         return NotFound();    
         }
 
         return Page();
+    }
+    
+    public async Task<string?> GetUserIdByRecipeIdAsync(int recipeId)
+    {
+        return await _context.Recipes
+            .Where(r => r.Id == recipeId)
+            .Select(r => r.UserId) // Hier laden wir gezielt nur die ID
+            .FirstOrDefaultAsync();
     }
     
     // Diese Methode wird durch asp-page-handler="Delete" aufgerufen
