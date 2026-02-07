@@ -46,7 +46,7 @@ Folgende Konzepte habe ich in diesem Projekt tiefgreifend verankert:
 https://github.com/user-attachments/assets/953da8ae-f11f-4654-925e-ffe42282fdb1
 
 
-## 🧪 Test-Account (Demo)
+## Test-Account (Demo)
 Um die Funktionen für registrierte Nutzer (Rezepte erstellen, eigene Rezepte verwalten) sofort testen zu können, ohne ein neues Konto zu erstellen, kann dieser Test-Account genutzt werden:
 
 Besitzer der Rezepte:
@@ -59,7 +59,7 @@ Test User:
 
 > **Hinweis:** Als Testnutzer können Sie nur Rezepte bearbeiten oder löschen, die diesem Account zugeordnet sind (Sicherheits-Feature "Ownership-Check").
 
-## 💻 Installation & Start
+## Installation & Start
 1.  **Repository klonen:** `git clone https://github.com/dein-benutzername/RezeptVerwaltung.git`
 2.  **Datenbank vorbereiten:** `dotnet ef database update`
 3.  **App starten:** `dotnet run`
