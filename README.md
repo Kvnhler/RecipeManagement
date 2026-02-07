@@ -55,10 +55,12 @@ https://github.com/user-attachments/assets/953da8ae-f11f-4654-925e-ffe42282fdb1
 ## 🧪 Test-Account (Demo)
 Um die Funktionen für registrierte Nutzer (Rezepte erstellen, eigene Rezepte verwalten) sofort testen zu können, ohne ein neues Konto zu erstellen, kann dieser Test-Account genutzt werden:
 
+Besitzer der Rezepte:
 * **E-Mail:** admin@example.com
 * **Passwort:** Demo123!
 
-* * **E-Mail:** anotherExample@mail.com
+Test User:
+* **E-Mail:** anotherExample@mail.com
 * **Passwort:** Demo123!
 
 > **Hinweis:** Als Testnutzer können Sie nur Rezepte bearbeiten oder löschen, die diesem Account zugeordnet sind (Sicherheits-Feature "Ownership-Check").
