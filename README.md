@@ -58,6 +58,9 @@ Um die Funktionen für registrierte Nutzer (Rezepte erstellen, eigene Rezepte ve
 * **E-Mail:** admin@example.com
 * **Passwort:** Demo123!
 
+* * **E-Mail:** anotherExample@mail.com
+* **Passwort:** Demo123!
+
 > **Hinweis:** Als Testnutzer können Sie nur Rezepte bearbeiten oder löschen, die diesem Account zugeordnet sind (Sicherheits-Feature "Ownership-Check").
 
 ## 💻 Installation & Start
